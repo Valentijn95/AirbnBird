@@ -1,0 +1,20 @@
+<h1>Bird index</h1>
+
+<div class="d-flex flex-row flex-wrap">
+  <% @birds.each do |bird| %>
+    <div class="card flex-column col-3 b-1 m-2 p-4">
+      <h5><%= link_to bird.title, bird_path(bird.id) %></h5>
+      <img src="<%= bird.title %>" alt="bird" height=200px>
+      <p><%= bird.description %></p>
+      <p>$ <%= bird.price %></p>
+      <p>Categories: <%= bird.categories %></p>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "go back to homepage 🏠", root_path %>
+
+<%#
+<%= link_to "Delete 🦜", bird_path(bird.id),
+data: { turbo_method: :delete, turbo_confirm: "Are you bird???" },
+class: "btn btn-danger btn-sm rounded" %>
