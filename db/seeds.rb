@@ -60,7 +60,7 @@ for a in 1..5 do
   d = DateTime.now
   d.strftime("%d/%m/%Y")
 
-  Booking.create!(bird_id: bird_id, user_id: user_id, status: status, start_date: d)
+  Booking.create!(bird_id: bird_id, user_id: user_id, status: status, start_date: d, end_date: d)
 end
 
 puts "#{Booking.count} bookings created"
