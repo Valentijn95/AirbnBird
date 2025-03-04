@@ -1,6 +1,7 @@
 <%= simple_form_for bird do |f| %>
-   <%= f.input :title %>
-   <%= f.input :dedscription, as: :text, :input_html => { :cols => 5, :rows => 10 } %>
-   <%= f.input :dedscription, as: :text, :input_html => { :cols => 5, :rows => 10 } %>
-   <%= f.button :submit, class: 'btn btn-primary'%>
+  <%= f.input :title %>
+  <%= f.input :description, as: :text, :input_html => { :cols => 5, :rows => 10 } %>
+  <%= f.input :price, as: :integer %>
+  <%= f.input :categories, collection: @categories, prompt: "Pick a category", label: false %>
+  <%= f.button :submit, class: 'btn btn-primary'%>
 <% end %>
