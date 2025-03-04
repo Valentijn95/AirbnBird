@@ -8,6 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 require "faker"
+puts "seeding"
+
+puts "------------------------"
+puts ""
 
 puts "empty user table"
 User.delete_all
@@ -20,6 +24,8 @@ for a in 1..10 do
 end
 puts "#{User.count} user created"
 
+puts "------------------------"
+puts ""
 
 puts "empty birds table"
 Bird.delete_all
@@ -38,6 +44,9 @@ for a in 1..20 do
   Bird.create!(title: title, description: description, price: price, user_id: user_id)
 end
 puts "#{Bird.count} birds created"
+
+puts "------------------------"
+puts ""
 
 puts "delete bookings"
 Booking.delete_all
