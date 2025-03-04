@@ -3,8 +3,9 @@ class BirdsController < ApplicationController
   before_action :initialize_bird, only: [:show, :edit, :update, :destroy]
 
   def index
-
+    @birds = Bird.all
   end
+
   def show
     # Find the bird by ID
     @bird = Bird.find(params[:id])
