@@ -13,10 +13,17 @@ class BirdsController < ApplicationController
 
   def new
     @bird = Bird.new
+    @categories = ["Exotic birds", "Large birds", "Birds for Therapy", "Birds for Breeding", "Messenger Birds"]
   end
 
   def create
-
+    @bird = Bird.new(bird_params)
+    @bird.user = current_user
+    if @bird.save!
+      redirect_to birds_path
+    else
+      render 'form', notice: t("couldn't create this bird")
+    end
   end
 
   def edit
@@ -33,10 +40,13 @@ class BirdsController < ApplicationController
 
   private
 
-  def initialize_bird()
+  def initialize_bird
     @bird = Bird.find(params[:id])
   end
 
+  def bird_params
+    params.require(:bird).permit(:title, :description, :price, :categories)
+  end
 
 
 end
