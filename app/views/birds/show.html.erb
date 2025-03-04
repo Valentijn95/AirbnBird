@@ -1,2 +1,8 @@
-<h1><%= @bird.name %></h1>
-<p><%= @bird.description %></p>
+<h1>Bird Information</h1>
+
+<h2><%= @bird.title %></h2>
+
+<p><strong>Description:</strong> <%= @bird.description %></p>
+<p><strong>Price:</strong> <%= number_to_currency(@bird.price) %></p>
+<p><strong>Categories:</strong> <%= @bird.categories %></p>
+
