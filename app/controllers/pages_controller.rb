@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
   def home
-    redirect_to birds_path
   end
 
   def dashboard

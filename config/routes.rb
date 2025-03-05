@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "pages#home"
+  root to: "birds#index"
   devise_for :users
 
   resources :birds do
@@ -8,5 +8,5 @@ Rails.application.routes.draw do
 
   resources :bookings, only: [:index, :show, :update, :destroy]
 
-  get "dashboard", to: "pages#dashboard"
+  get "dashboard", to: "pages#dashboard", as: 'dashboard'
 end
