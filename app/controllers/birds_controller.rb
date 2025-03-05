@@ -20,10 +20,10 @@ class BirdsController < ApplicationController
   def create
     @bird = Bird.new(bird_params)
     @bird.user = current_user
-    if @bird.save!
+    if @bird.save
       redirect_to birds_path
     else
-      render 'form', notice: t("couldn't create this bird")
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -39,15 +39,27 @@ class BirdsController < ApplicationController
     end
   end
 
-  def destroy
+def destroy
+  @bird = Bird.find(params[:id])
 
+  if @bird && @bird.destroy
+    redirect_to birds_path, notice: 'Bird successfully deleted.'
+  else
+    redirect_to birds_path, alert: 'Failed to delete bird.'
   end
+end
+
 
   private
 
   def initialize_bird
-    @bird = Bird.find(params[:id])
+    @bird = Bird.find_by(id: params[:id])
+
+    unless @bird
+      redirect_to birds_path, alert: "Bird not found."
+    end
   end
+
 
   def bird_params
     params.require(:bird).permit(:title, :description, :price, :categories)

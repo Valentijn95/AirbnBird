@@ -1,5 +1,6 @@
 class Bird < ApplicationRecord
   belongs_to :user
 
-  validates :description, :price, :title, presence: true
+  validates :description, :title, presence: true
+  validates :price, presence: true
 end
