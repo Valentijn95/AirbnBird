@@ -1,5 +1,5 @@
 class BirdsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :initialize_bird, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -9,6 +9,7 @@ class BirdsController < ApplicationController
   def show
     # Find the bird by ID
     @bird = Bird.find(params[:id])
+    @booking = Booking.new
   end
 
   def new
