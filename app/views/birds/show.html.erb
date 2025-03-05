@@ -6,4 +6,8 @@
 <p><strong>Price:</strong> <%= number_to_currency(@bird.price) %></p>
 <p><strong>Categories:</strong> <%= @bird.categories %></p>
 
-<%= render 'bookings/booking_new', booking: @booking, bird: @bird%>
+<div class="container">
+  <div class="col-6">
+  <%= render 'bookings/booking_new', booking: @booking, bird: @bird%>
+  </div>
+</div>
