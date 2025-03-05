@@ -14,7 +14,9 @@ puts "------------------------"
 puts ""
 
 puts "empty user table"
-User.delete_all
+User.destroy_all
+Bird.destroy_all
+Booking.destroy_all
 
 puts "create new users..."
 for a in 1..10 do
@@ -28,9 +30,6 @@ puts "#{User.count} user created"
 
 puts "------------------------"
 puts ""
-
-puts "empty birds table"
-Bird.delete_all
 
 puts "create new birds..."
 for a in 1..20 do
@@ -49,9 +48,6 @@ puts "#{Bird.count} birds created"
 
 puts "------------------------"
 puts ""
-
-puts "delete bookings"
-Booking.delete_all
 
 puts "generate some bookings"
 

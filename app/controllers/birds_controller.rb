@@ -10,6 +10,9 @@ class BirdsController < ApplicationController
     # Find the bird by ID
     @bird = Bird.find(params[:id])
     @booking = Booking.new
+    @booked_dates = @bird.bookings.pluck(:start_date, :end_date) do |range|
+      (range[0]..range[1]).to_a
+    end
   end
 
   def new
