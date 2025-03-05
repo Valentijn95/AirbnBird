@@ -18,10 +18,6 @@ class BookingsController < ApplicationController
 
     @booking.end_date = end_date
 
-    # @booked_dates = @bird.bookings.pluck(:start_date, :end_date) do |range|
-    #   (range[0]..range[1]).to_a
-    # end.flatten
-
     if @booking.save
       redirect_to bird_path(@booking.bird_id), notice: "✅ Booking succesfull "
     else

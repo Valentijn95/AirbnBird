@@ -8,3 +8,5 @@
   <%= f.button :submit, class: 'btn btn-primary'%>
   <%= f.input :bird_id, as: :hidden, input_html: { value: bird.id } %>
 <% end %>
+
+<input type="hidden" id='booking-dates' value="<%= @booked_dates.to_json %>">

@@ -3,14 +3,19 @@ import flatpickr from "flatpickr"; // You need to import this to use new flatpic
 
 // Connects to data-controller="datepicker"
 export default class extends Controller {
-  static values = {
-    dates: String
-  }
 
   connect() {
-    console.log(this.datesValue)
+    const bookedDates = this.#getBookedDates()
     flatpickr(this.element, {
-      mode: "range"
-    }
-  )}
+      mode: "range",
+      dateFormat: "Y-m-d",
+      disable: bookedDates.map((date) => {
+        return { from: date[0], to: date[1] }
+      })
+    })
+  }
+
+  #getBookedDates() {
+    return JSON.parse(document.getElementById("booking-dates").value)
+  }
 }
