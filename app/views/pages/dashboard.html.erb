@@ -1,19 +1,41 @@
 
 <div class="row">
-<div class="col-6">
-  <h2>Your bookings</h2>
+<div class="col-6 pt-4">
+  <h2 class="mb-4">Your bookings</h2>
+
+    <% if @bookings == [] %>
+      <div class="message">
+        <p>You don't have any bookings active currently</p>
+      </div>
+    <% else %>
+      <div class="bookings">
+        <% @bookings.each do |booking| %>
+          <div class="row py-4" data-controller="booking">
+            <div class="col-12">
+              <h3><%= booking.bird.title %></h3>
+              <span class="status" data-booking-target="status"><%= booking.status %></span>
+              <span>from: <%= booking.start_date %> until: <%= booking.end_date %></span>
+            </div>
+
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+
 
 </div>
-<div class="col-6">
-  <h2>Your birds</h2>
+<div class="col-6 pt-4">
+  <h2 class="mb-4">Your birds</h2>
+
     <div class="d-flex flex-row flex-wrap">
-      <% if @birds == nil %>
+      <% if @birds == [] %>
         <div class="message">
           <p>You have no birds for rental yet</p>
         </div>
-
-        <%= link_to "Create bird",  new_bird_path, class: "btn-dashboard btn btn-primary mt-3"%>
+        <%= link_to "Create bird",  new_bird_path, class: "btn-dashboard btn btn-primary my-3"%>
       <% else %>
+      <%= link_to "Create bird",  new_bird_path, class: "btn-dashboard btn btn-primary my-3"%>
         <% @birds.each do |bird| %>
           <div class="card flex-column col-3 b-1 m-2 p-4">
             <h5><%= link_to bird.title, bird_path(bird.id) %></h5>

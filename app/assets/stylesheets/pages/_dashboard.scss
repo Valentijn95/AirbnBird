@@ -7,3 +7,24 @@
 .btn-dashboard {
   width: 100%;
 }
+
+.bookings h3 {
+  font-size: 1.3rem;
+}
+
+.status {
+  padding: 0.6rem;
+  border-radius: 1rem;
+}
+
+.pending-status {
+  background-color: rgb(132, 96, 155);
+}
+
+.accepted-status {
+  background-color: rgb(84, 166, 88);
+}
+
+.denied-status {
+  background-color: rgb(168, 94, 82);
+}
