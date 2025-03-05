@@ -3,9 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :birds do
-    resources :bookings, only: [:create]
   end
 
-  resources :bookings, only: [:index, :show, :update, :destroy]
+  resources :bookings, only: [:index, :show, :create, :update, :destroy]
 
 end
