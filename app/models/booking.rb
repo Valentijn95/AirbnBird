@@ -18,7 +18,7 @@ class Booking < ApplicationRecord
 
   def start_date_in_future?
     if start_date.present? && start_date < Date.today
-      errors.add(:start_date, "The date you selected is in the past")
+      errors.add(:start_date, "The start date you selected is in the past")
     end
   end
 

@@ -1,6 +1,10 @@
 <%= simple_form_for booking do |f| %>
-  <%= f.input :start_date, as: :date, html5: true %>
-  <%= f.input :end_date, as: :date, html5: true %>
+  <%# <%= f.input :start_date, as: :date, html5: true %>
+  <%= f.input :start_date,
+              label: "Choose your dates",
+              as: :string,
+              input_html: { data: { controller: "datepicker"}} %>
+  <%= f.input :end_date, as: :hidden %>
   <%= f.button :submit, class: 'btn btn-primary'%>
   <%= f.input :bird_id, as: :hidden, input_html: { value: bird.id } %>
 <% end %>
