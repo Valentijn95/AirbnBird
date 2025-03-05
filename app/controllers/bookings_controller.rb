@@ -6,13 +6,18 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.new(booking_params)
-    @booking.user = current_user
-    if @booking.save
-      puts "booking saved"
-    else
-      render :new, status: :unprocessable_entity
-    end
+    # if !current_user
+    #   render :loginalert, status: :unprocessable_entity
+    # else
+      @booking = Booking.new(booking_params)
+      @booking.user = current_user
+      @booking.save
+      if @booking.save
+      redirect_to bird_path(@booking.bird_id), notice: "booking succesfull ✅"
+      else
+        redirect_to bird_path(@booking.bird_id), notice: "booking not succesfull"
+      end
+    # end
   end
 
   def update
