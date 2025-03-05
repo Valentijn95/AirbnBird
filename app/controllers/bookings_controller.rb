@@ -6,14 +6,17 @@ class BookingsController < ApplicationController
   end
 
   def create
+    end_date = booking_params[:start_date].split(" to ").last
     @booking = Booking.new(booking_params)
-
+    @bird = Bird.find(booking_params[:bird_id])
     if !current_user
       redirect_to new_user_session_path, notice: "You need to be logged in to book a bird."
       return
     end
 
     @booking.user = current_user
+
+    @booking.end_date = end_date
 
     if @booking.save
       redirect_to bird_path(@booking.bird_id), notice: "✅ Booking succesfull "
@@ -34,7 +37,7 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-      params.require(:booking).permit(:start_date, :end_date, :bird_id)
+      params.require(:booking).permit(:start_date, :bird_id, :end_date)
   end
 
 end
