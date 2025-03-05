@@ -1,7 +1,10 @@
-<%= simple_form_for bird do |f| %>
-  <%= f.input :title %>
-  <%= f.input :description, as: :text, :input_html => { :cols => 5, :rows => 10 } %>
-  <%= f.input :price, as: :integer %>
-  <%= f.input :categories, collection: @categories, prompt: "Pick a category", label: false %>
-  <%= f.button :submit, class: 'btn btn-primary'%>
-<% end %>
+<div class="mt-4">
+  <%= simple_form_for bird do |f| %>
+      <!-- The input field that will be updated -->
+      <%= f.input :title %>
+      <%= f.input :description, as: :text, input_html: { cols: 5, rows: 10 } %>
+      <%= f.input :price, as: :integer %>
+      <%= f.input :categories, collection: @categories, prompt: "Pick a category", label: false, input_html: { data: { categories_target: "selector" } } %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  <% end %>
+</div>
