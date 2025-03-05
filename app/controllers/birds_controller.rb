@@ -20,10 +20,10 @@ class BirdsController < ApplicationController
   def create
     @bird = Bird.new(bird_params)
     @bird.user = current_user
-    if @bird.save!
+    if @bird.save
       redirect_to birds_path
     else
-      render 'form', notice: t("couldn't create this bird")
+      render :new, status: :unprocessable_entity
     end
   end
 
