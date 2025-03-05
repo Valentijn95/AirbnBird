@@ -18,6 +18,8 @@ User.delete_all
 
 puts "create new users..."
 for a in 1..10 do
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name
   email = Faker::Internet.email
   password = "password"
   User.create!(email: email, password: password)
@@ -35,13 +37,13 @@ for a in 1..20 do
   prefix = Faker::Creature::Bird.adjective
   location = Faker::Creature::Bird.geo
   bird = Faker::Creature::Bird.common_family_name
-
+  cat = ["Exotic birds", "Large birds", "Birds for Therapy", "Birds for Breeding", "Messenger Birds"].sample
   title = "#{prefix} #{location} #{bird}"
   description = Faker::Lorem.paragraph(sentence_count: 3, supplemental: true, random_sentences_to_add: 4)
   price = rand(10..100)
   user_id = User.all.sample.id
 
-  Bird.create!(title: title, description: description, price: price, user_id: user_id)
+  Bird.create!(categories: cat, title: title, description: description, price: price, user_id: user_id)
 end
 puts "#{Bird.count} birds created"
 

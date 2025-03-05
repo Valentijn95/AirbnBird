@@ -32,7 +32,11 @@ class BirdsController < ApplicationController
   end
 
   def update
-
+    if @bird.update(bird_params)
+      redirect_to @bird, notice: "Bird updated successfully!"
+    else
+      render :edit, alert: "Couldn't update this bird."
+    end
   end
 
   def destroy
