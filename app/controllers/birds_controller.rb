@@ -43,9 +43,9 @@ def destroy
   @bird = Bird.find(params[:id])
 
   if @bird && @bird.destroy
-    redirect_to birds_path, notice: 'Bird successfully deleted.'
+    redirect_to dashboard_path, notice: 'Bird successfully deleted.'
   else
-    redirect_to birds_path, alert: 'Failed to delete bird.'
+    redirect_to dashboard_path, alert: 'Failed to delete bird.'
   end
 end
 
