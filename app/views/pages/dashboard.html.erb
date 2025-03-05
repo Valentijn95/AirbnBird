@@ -1,26 +1,70 @@
 
 <div class="row">
-<div class="col-6">
-  <h2>Your bookings</h2>
+
+<div class="col-6 pt-4">
+  <h2 class="mb-4">Your bookings</h2>
+
+    <% if @bookings == [] %>
+      <div class="message">
+        <p>You don't have any bookings active currently</p>
+      </div>
+    <% else %>
+      <div class="bookings">
+        <% @bookings.each do |booking| %>
+          <div class="row py-4 clickable" data-controller="booking">
+            <div  class="col-12"
+                  data-action="click->booking-modal#toggle:stop"
+                  data-controller="booking-modal"
+                  data-booking-modal-title-value="<%= booking.bird.title %>"
+                  data-booking-modal-description-value="<%= booking.bird.description %>"
+                  data-booking-modal-start-value="<%= booking.start_date%>"
+                  data-booking-modal-end-value="<%= booking.end_date%>">
+              <h3><%= booking.bird.title %></h3>
+              <span class="status" data-booking-target="status"><%= booking.status %></span>
+              <span>from: <%= booking.start_date %> until: <%= booking.end_date %></span>
+
+            <div class="booking-modal d-none" data-booking-modal-target="modal">
+              <div class="modal-wrapper" data-action="click->booking-modal#close:stop">
+
+              </div>
+                <div class="modal-show">
+                  <h2 class="booking-modal-title" data-booking-modal-target="title"></h2>
+                  <p data-booking-modal-target="description"></p>
+                  <p data-booking-modal-target="date"></p>
+                  <img src="" alt="bird">
+                  <%= button_to "Cancel booking",  booking_path(booking.id), :method => :delete, class: "btn btn-cancel" %>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+
 
 </div>
-<div class="col-6">
-  <h2>Your birds</h2>
-    <div class="d-flex flex-row flex-wrap">
-      <% if @birds == nil %>
+<div class="col-6 pt-4">
+  <div class="row">
+    <div class="col-9"><h2 class="mb-4">Your birds</h2></div>
+    <div class="col-3"><%= link_to "Add bird + ",  new_bird_path, class: "btn-dashboard btn btn-success"%></div>
+  </div>
+
+    <div class="row justify-content-between">
+      <% if @birds == [] %>
         <div class="message">
           <p>You have no birds for rental yet</p>
         </div>
-
-        <%= link_to "Create bird",  new_bird_path, class: "btn-dashboard btn btn-primary mt-3"%>
       <% else %>
         <% @birds.each do |bird| %>
-          <div class="card flex-column col-3 b-1 m-2 p-4">
+          <div class="card flex-column col-5 b-1 m-2 p-4">
             <h5><%= link_to bird.title, bird_path(bird.id) %></h5>
-            <img src="<%= bird.title %>" alt="bird" height=200px>
+            <img src="<%= bird.title %>" alt="bird" height=150px>
             <p>$ <%= bird.price %></p>
             <p>Categories: <%= bird.categories %></p>
-          <%= button_to "delete", bird_path(bird.id), :method => :delete, :class => "btn btn-danger"%>
+            <%= button_to "delete", bird_path(bird.id), :method => :delete, :class => "btn btn-cancel"%>
           </div>
         <% end %>
       <% end %>
@@ -28,5 +72,8 @@
 
     </div>
 </div>
+
+
+
 
 </div>

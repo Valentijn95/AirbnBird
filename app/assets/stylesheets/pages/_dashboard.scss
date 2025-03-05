@@ -7,3 +7,56 @@
 .btn-dashboard {
   width: 100%;
 }
+
+.bookings h3 {
+  font-size: 1.3rem;
+}
+
+.status {
+  padding: 0.6rem;
+  border-radius: 1rem;
+}
+
+.pending-status {
+  background-color: rgb(132, 96, 155);
+}
+
+.accepted-status {
+  background-color: rgb(84, 166, 88);
+}
+
+.denied-status {
+  background-color: rgb(168, 94, 82);
+}
+
+.clickable {
+  cursor: pointer;
+  border-radius: 1.5rem;
+}
+
+.clickable:hover {
+  background-color: rgb(165, 165, 165);
+}
+
+.modal-wrapper {
+  top: 0;
+  right: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  background-color:rgb(43, 43, 43);
+  opacity: 70%;
+}
+
+.modal-show {
+  padding: 1rem;
+  position: absolute;
+  height: 80%;
+  width: 80%;
+  background-color: white;
+  z-index: 3;
+  top: 10%;
+  right: 10%;
+  opacity: 100%;
+}
