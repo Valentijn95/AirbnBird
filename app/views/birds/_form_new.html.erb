@@ -5,6 +5,7 @@
       <%= f.input :description, as: :text, input_html: { cols: 5, rows: 10 } %>
       <%= f.input :price, as: :integer %>
       <%= f.input :categories, collection: @categories, prompt: "Pick a category", label: false, input_html: { data: { categories_target: "selector" } } %>
+      <%= f.input :photo, as: :file %>
     <%= f.button :submit, class: 'btn btn-primary' %>
   <% end %>
 </div>

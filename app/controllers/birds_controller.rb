@@ -1,3 +1,5 @@
+require "cloudinary"
+
 class BirdsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :initialize_bird, only: [:show, :edit, :update, :destroy]
@@ -10,7 +12,8 @@ class BirdsController < ApplicationController
     # Find the bird by ID
     @bird = Bird.find(params[:id])
     @booking = Booking.new
-    @booked_dates = @bird.bookings.pluck(:start_date, :end_date) do |range|
+    @accepted_bookings = @bird.bookings.where(status: "accepted")
+    @booked_dates = @accepted_bookings.pluck(:start_date, :end_date) do |range|
       (range[0]..range[1]).to_a
     end
   end
@@ -21,6 +24,7 @@ class BirdsController < ApplicationController
   end
 
   def create
+
     @bird = Bird.new(bird_params)
     @bird.user = current_user
     if @bird.save
@@ -31,7 +35,7 @@ class BirdsController < ApplicationController
   end
 
   def edit
-
+    @bird = Bird.find(params[:id])
   end
 
   def update
@@ -65,7 +69,7 @@ end
 
 
   def bird_params
-    params.require(:bird).permit(:title, :description, :price, :categories)
+    params.require(:bird).permit(:title, :description, :price, :categories, :photo)
   end
 
 

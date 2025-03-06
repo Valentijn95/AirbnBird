@@ -1,10 +1,8 @@
-
 <div class="row">
+  <div class="col-6 pt-4">
+    <h2 class="mb-4">Your bookings</h2>
 
-<div class="col-6 pt-4">
-  <h2 class="mb-4">Your bookings</h2>
-
-    <% if @bookings == [] %>
+    <% if @bookings.empty? %>
       <div class="message">
         <p>You don't have any bookings active currently</p>
       </div>
@@ -12,36 +10,34 @@
       <div class="bookings">
         <% @bookings.each do |booking| %>
           <div class="row py-4 clickable" data-controller="booking">
-            <div  class="col-12"
-                  data-action="click->booking-modal#toggle:stop"
-                  data-controller="booking-modal"
-                  data-booking-modal-title-value="<%= booking.bird.title %>"
-                  data-booking-modal-description-value="<%= booking.bird.description %>"
-                  data-booking-modal-start-value="<%= booking.start_date%>"
-                  data-booking-modal-end-value="<%= booking.end_date%>">
+            <div class="col-12"
+                 data-action="click->booking-modal#toggle:stop"
+                 data-controller="booking-modal"
+                 data-booking-modal-title-value="<%= booking.bird.title %>"
+                 data-booking-modal-description-value="<%= booking.bird.description %>"
+                 data-booking-modal-start-value="<%= booking.start_date %>"
+                 data-booking-modal-end-value="<%= booking.end_date %>">
               <h3><%= booking.bird.title %></h3>
               <span class="status" data-booking-target="status"><%= booking.status %></span>
               <span>from: <%= booking.start_date %> until: <%= booking.end_date %></span>
 
-            <div class="booking-modal d-none" data-booking-modal-target="modal">
-              <div class="modal-wrapper" data-action="click->booking-modal#close:stop">
-
-              </div>
+              <div class="booking-modal d-none" data-booking-modal-target="modal">
+                <div class="modal-wrapper" data-action="click->booking-modal#close:stop">
+                </div>
                 <div class="modal-show">
                   <h2 class="booking-modal-title" data-booking-modal-target="title"></h2>
                   <p data-booking-modal-target="description"></p>
                   <p data-booking-modal-target="date"></p>
                   <img src="" alt="bird">
-                  <%= button_to "Cancel booking",  booking_path(booking.id), :method => :delete, class: "btn btn-cancel" %>
+                  <%= button_to "Cancel booking", booking_path(booking.id), data: { turbo_confirm: "Do you really want to cancel this booking?" }, method: :delete, class: "btn btn-cancel" %>
                 </div>
               </div>
-
             </div>
-
           </div>
         <% end %>
       </div>
     <% end %>
+
 
 <%# ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ incoming bookings section ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ %>
 
@@ -98,29 +94,37 @@
     <div class="col-3"><%= link_to "Add bird + ",  new_bird_path, class: "btn-dashboard btn btn-success"%></div>
   </div>
 
+  <div class="col-6 pt-4">
+    <div class="row">
+      <div class="col-9"><h2 class="mb-4">Your birds</h2></div>
+      <div class="col-3"><%= link_to "Add bird + ", new_bird_path, class: "btn-dashboard btn btn-success" %></div>
+    </div>
+
     <div class="row justify-content-between">
-      <% if @birds == [] %>
+      <% if @birds.empty? %>
         <div class="message">
           <p>You have no birds for rental yet</p>
         </div>
       <% else %>
         <% @birds.each do |bird| %>
           <div class="card flex-column col-5 b-1 m-2 p-4">
-            <h5><%= link_to bird.title, bird_path(bird.id) %></h5>
-            <%= image_tag "penise.avif", class: "dashboard-bird-image" %>
+
+            <h5><%= link_to bird.title, bird_path(bird.id), class: "bird-card-title" %></h5>
+            <%= image_tag "bird_example.jpg", class: "dashboard-bird-image" %>
+
             <p>$ <%= bird.price %></p>
             <p>Categories: <%= bird.categories %></p>
             <br>
-            <%= button_to "delete", bird_path(bird.id), :method => :delete, :class => "btn btn-cancel"%>
+
+            <!-- Add the Update Button here -->
+            <%= link_to "Update", edit_bird_path(bird), class: "btn btn-update mt-2" %>
+
+            <!-- Optional: Delete Button -->
+            <%= button_to "Delete", bird_path(bird.id), data: { turbo_confirm: "Are you sure you want to delete #{bird.title}?" }, method: :delete, class: "btn btn-cancel mt-2" %>
           </div>
         <% end %>
       <% end %>
-
-
     </div>
-</div>
-
-
-
+  </div>
 
 </div>
