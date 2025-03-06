@@ -35,7 +35,7 @@ class BirdsController < ApplicationController
   end
 
   def edit
-
+    @bird = Bird.find(params[:id])
   end
 
   def update
