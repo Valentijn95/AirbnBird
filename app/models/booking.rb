@@ -5,14 +5,9 @@ class Booking < ApplicationRecord
   validates :status, :start_date, :end_date, presence: true
   validate :start_date_in_future?
   validate :end_date_after_start_date?
-  validates :status, inclusion: { in: %w(pending accepted denied),
-  message: "status can only be pending, accepted or denied" }
+  validates :status, inclusion: { in: %w(pending accepted denied), message: "status can only be pending, accepted, or denied" }
 
-
-  # step 1: start date > now
-  # step 2: end date < start date
-  # step 3: period between start date and end date don't overlap with already booked dates
-  # step 4: already taken dates are displayed in date picker
+  validate :cannot_book_own_bird
 
   private
 
@@ -28,4 +23,9 @@ class Booking < ApplicationRecord
     end
   end
 
+  def cannot_book_own_bird
+    if bird.user == user
+      errors.add(:bird, "You cannot book your own bird")
+    end
+  end
 end

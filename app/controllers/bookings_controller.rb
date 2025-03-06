@@ -9,6 +9,12 @@ class BookingsController < ApplicationController
     end_date = booking_params[:start_date].split(" to ").last
     @booking = Booking.new(booking_params)
     @bird = Bird.find(booking_params[:bird_id])
+
+    if @bird.user == current_user
+      redirect_to bird_path(@bird), alert: "You cannot book your own bird!"
+      return
+    end
+
     if !current_user
       redirect_to new_user_session_path, notice: "You need to be logged in to book a bird."
       return
