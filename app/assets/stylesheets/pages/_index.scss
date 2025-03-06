@@ -9,3 +9,16 @@
   padding: 20px;
 }
 
+.card a {
+  padding-top: 0.5rem;
+  display: block;
+  padding-bottom: 0.5rem;
+  width: 100%;
+  color: black;
+  text-decoration: none;
+  transition-duration: 200ms;
+}
+
+.card a:hover{
+  background-color: rgb(166, 160, 205);
+}

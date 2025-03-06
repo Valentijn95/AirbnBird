@@ -4,4 +4,6 @@ class Bird < ApplicationRecord
 
   validates :description, :title, presence: true
   validates :price, presence: true
+
+  has_one_attached :photo
 end
