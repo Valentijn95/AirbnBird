@@ -1,3 +1,5 @@
+require "cloudinary"
+
 class BirdsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :initialize_bird, only: [:show, :edit, :update, :destroy]
@@ -21,6 +23,7 @@ class BirdsController < ApplicationController
   end
 
   def create
+
     @bird = Bird.new(bird_params)
     @bird.user = current_user
     if @bird.save
@@ -65,7 +68,7 @@ end
 
 
   def bird_params
-    params.require(:bird).permit(:title, :description, :price, :categories)
+    params.require(:bird).permit(:title, :description, :price, :categories, :photo)
   end
 
 
