@@ -21,6 +21,7 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to dashboard_path(@booking.bird_id), notice: "✅ Booking succesfull "
     else
+      raise
       redirect_to bird_path(@booking.bird_id), notice: "❌ Booking not successfull: #{@booking.errors[:start_date][0]}"
     end
   end
