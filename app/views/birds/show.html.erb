@@ -10,9 +10,10 @@
   <p><strong>Price:</strong> <%= number_to_currency(@bird.price) %></p>
   <p><strong>Categories:</strong> <%= @bird.categories %></p>
 
-  <div class="row justify-content-center p-4 my-3">
-    <div class="col-6"><%= render 'bookings/booking_new', booking: @booking, bird: @bird%></div>
-  </div>
-
+  <% if @bird.user != current_user%>
+    <div class="row justify-content-center p-4 my-3">
+      <div class="col-6"><%= render 'bookings/booking_new', booking: @booking, bird: @bird%></div>
+    </div>
+  <% end %>
 
 </div>
