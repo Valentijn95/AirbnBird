@@ -3,6 +3,9 @@
   <h1 class="fw-bold display-4"><%= @bird.title.titleize %></h1>
 
   <h2></h2>
+  <div class="container col-6">
+  <%= image_tag "penise.avif", class: "dashboard-bird-image my-4" %>
+  </div>
 
   <p><strong>Description:</strong> <%= @bird.description %></p>
   <p><strong>Price:</strong> <%= number_to_currency(@bird.price) %></p>

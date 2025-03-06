@@ -9,7 +9,4 @@ Rails.application.routes.draw do
 
   get "dashboard", to: "pages#dashboard", as: 'dashboard'
 
-  patch "booking/:id/accept", to: "pages#accept_booking"
-
-
 end

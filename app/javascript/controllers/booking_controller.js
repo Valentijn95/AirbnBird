@@ -11,7 +11,7 @@ export default class extends Controller {
     } else if (this.statusTarget.innerText == "accepted") {
       this.statusTarget.classList.add("accepted-status");
     } else {
-      this.statusTarget.classList.add("denied-status");
+      this.statusTarget.classList.add("declined-status");
     }
   }
 }

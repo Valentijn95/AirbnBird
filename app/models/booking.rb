@@ -5,8 +5,8 @@ class Booking < ApplicationRecord
   validates :status, :start_date, :end_date, presence: true
   validate :start_date_in_future?
   validate :end_date_after_start_date?
-  validates :status, inclusion: { in: %w(pending accepted denied),
-  message: "status can only be pending, accepted or denied" }
+  validates :status, inclusion: { in: %w(pending accepted declined),
+  message: "status can only be pending, accepted or declined" }
 
 
   # step 1: start date > now
