@@ -19,7 +19,7 @@ class BookingsController < ApplicationController
     @booking.end_date = end_date
 
     if @booking.save
-      redirect_to bird_path(@booking.bird_id), notice: "✅ Booking succesfull "
+      redirect_to dashboard_path(@booking.bird_id), notice: "✅ Booking succesfull "
     else
       redirect_to bird_path(@booking.bird_id), notice: "❌ Booking not successfull: #{@booking.errors[:start_date][0]}"
     end
@@ -32,6 +32,17 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     @booking.destroy
     redirect_to dashboard_path
+  end
+
+  def accept_booking
+    @booking = Booking.find(params[:id])
+    @owner = @booking.bird.user
+    if @owner == current_user
+      @booking.update(status: "accepted")
+      @booking.save
+    else
+      redirect_to dashboard_path, notice: "You can't accept this booking"
+    end
   end
 
   private

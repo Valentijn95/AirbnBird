@@ -24,7 +24,7 @@ class BirdsController < ApplicationController
     @bird = Bird.new(bird_params)
     @bird.user = current_user
     if @bird.save
-      redirect_to birds_path
+      redirect_to dashboard_path, notice: "✅ Bird succesfully added to your flock!"
     else
       render :new, status: :unprocessable_entity
     end

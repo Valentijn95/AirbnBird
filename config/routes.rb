@@ -8,4 +8,8 @@ Rails.application.routes.draw do
   resources :bookings, only: [:index, :show, :create, :update, :destroy]
 
   get "dashboard", to: "pages#dashboard", as: 'dashboard'
+
+  patch "booking/:id/accept", to: "pages#accept_booking"
+
+
 end
