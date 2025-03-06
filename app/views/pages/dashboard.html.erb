@@ -61,7 +61,7 @@
             <br>
 
             <!-- Add the Update Button here -->
-            <%= link_to "Update", edit_bird_path(bird), class: "btn btn-primary mt-2" %>
+            <%= link_to "Update", edit_bird_path(bird), class: "btn btn-update mt-2" %>
 
             <!-- Optional: Delete Button -->
             <%= button_to "Delete", bird_path(bird.id), data: { turbo_confirm: "Are you sure you want to delete #{bird.title}?" }, method: :delete, class: "btn btn-cancel mt-2" %>
@@ -72,4 +72,3 @@
   </div>
 
 </div>
-
