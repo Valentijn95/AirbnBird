@@ -43,3 +43,102 @@
 .btn-success:hover {
   background-color: rgb(109, 180, 142);
 }
+
+.btn-update-bird {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #007bff; /* Blue color for Update */
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-update-bird:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05);
+}
+
+.btn-update-bird:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.75);
+}
+
+.btn-secondary {
+  width: 88.25px;
+  height: 40px;
+  padding: 0;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  background-color: #6c757d; /* Gray color for Cancel */
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Darker gray on hover */
+  transform: scale(1.05);
+}
+
+.btn-secondary:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(108, 117, 125, 0.75);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;  /* Center buttons horizontally */
+  align-items: center;      /* Align buttons vertically */
+  gap: 10px;                /* Adds space between buttons */
+}
+
+.btn-update-bird, .btn-secondary {
+  width: 100px;             /* Set width for both buttons */
+  height: 40px;
+  padding: 0;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-update-bird {
+  background-color: #007bff; /* Blue color for Update */
+  color: white;
+  border: none;
+}
+
+.btn-update-bird:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05);
+}
+
+.btn-update-bird:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.75);
+}
+
+.btn-secondary {
+  background-color: #6c757d; /* Gray color for Cancel */
+  color: white;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Darker gray on hover */
+  transform: scale(1.05);
+}
+
+.btn-secondary:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(108, 117, 125, 0.75);
+}
