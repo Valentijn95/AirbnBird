@@ -1,13 +1,13 @@
-<h1>Bird index</h1>
+<h1 class="fw-bold display-4">Birds</h1>
 
-<div class="d-flex flex-row flex-wrap">
+<div class="d-flex flex-row flex-wrap justify-content-center custom-gap">
   <% @birds.each do |bird| %>
     <div class="card flex-column col-3 b-1 m-2 p-4">
-      <h5><%= link_to bird.title, bird_path(bird.id) %></h5>
-      <img src="<%= bird.title %>" alt="bird" height=200px>
-      <p><%= bird.description %></p>
-      <p>$ <%= bird.price %></p>
-      <p>Categories: <%= bird.categories %></p>
+      <h5 class="font-weight-bold"><%= link_to bird.title.titleize, bird_path(bird.id) %></h5>
+      <img src="<%= bird.title %>" alt="bird" height="200px">
+        <p class="flex-grow-1"><%= bird.description %></p>
+      <p class="flex-grow-1">$ <%= bird.price %></p>
+      <p class="flex-grow-1">Categories: <%= bird.categories %></p>
     </div>
   <% end %>
 </div>

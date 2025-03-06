@@ -10,3 +10,12 @@
 .navbar-lewagon .navbar-brand img {
   width: 150px;
 }
+
+
+.navbar-brand img {
+  width: 230px !important; /* Slightly bigger, adjust as needed */
+}
+
+.navbar-lewagon .container-fluid {
+  min-height: 10px;
+}
