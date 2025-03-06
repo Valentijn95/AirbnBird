@@ -32,7 +32,7 @@
                   <p data-booking-modal-target="description"></p>
                   <p data-booking-modal-target="date"></p>
                   <img src="" alt="bird">
-                  <%= button_to "Cancel booking",  booking_path(booking.id), :method => :delete, class: "btn btn-cancel" %>
+                  <%= button_to "Cancel booking",  booking_path(booking.id), data: {turbo_confirm: "Do you really want to cancel this booking?"}, :method => :delete, class: "btn btn-cancel" %>
                 </div>
               </div>
 
@@ -60,12 +60,12 @@
       <% else %>
         <% @birds.each do |bird| %>
           <div class="card flex-column col-5 b-1 m-2 p-4">
-            <h5><%= link_to bird.title, bird_path(bird.id) %></h5>
+            <h5><%= link_to bird.title, bird_path(bird.id), class: "bird-card-title"%></h5>
             <%= image_tag "bird_example.jpg", class: "dashboard-bird-image" %>
             <p>$ <%= bird.price %></p>
             <p>Categories: <%= bird.categories %></p>
             <br>
-            <%= button_to "delete", bird_path(bird.id), :method => :delete, :class => "btn btn-cancel"%>
+            <%= button_to "delete", bird_path(bird.id), data: { turbo_confirm: "are you sure you want to delete #{bird.title} " }, :method => :delete, :class => "btn btn-cancel"%>
           </div>
         <% end %>
       <% end %>
