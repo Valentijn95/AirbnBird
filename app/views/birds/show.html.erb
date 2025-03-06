@@ -1,9 +1,11 @@
 <!-- app/views/birds/show.html.erb -->
 <div class="container text-center">
   <h1 class="fw-bold display-4"><%= @bird.title.titleize %></h1>
+
   <% if @bird.photo.key != nil %>
     <%= cl_image_tag @bird.photo.key, width: 400, crop: :fill %>
   <% end %>
+
   <p><strong>Description:</strong> <%= @bird.description %></p>
   <p><strong>Price:</strong> <%= number_to_currency(@bird.price) %></p>
   <p><strong>Categories:</strong> <%= @bird.categories %></p>
