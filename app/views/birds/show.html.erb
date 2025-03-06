@@ -8,15 +8,9 @@
   <p><strong>Price:</strong> <%= number_to_currency(@bird.price) %></p>
   <p><strong>Categories:</strong> <%= @bird.categories %></p>
 
-  <% if @bird.user == current_user %>
-    <div class="alert alert-warning">
-      You cannot book your own bird.
-    </div>
-  <% else %>
-    
-    <div class="row justify-content-center p-4 my-3">
-      <div class="col-6"><%= render 'bookings/booking_new', booking: @booking, bird: @bird %></div>
-    </div>
-  <% end %>
+  <div class="row justify-content-center p-4 my-3">
+    <div class="col-6"><%= render 'bookings/booking_new', booking: @booking, bird: @bird%></div>
+  </div>
+
 
 </div>
