@@ -41,7 +41,6 @@
 <div class="row">
   <div class="col-4 pt-4">
     <h2 class="mb-4">Your bookings</h2>
-
     <% if @bookings.empty? %>
       <div class="message">
         <p>You didn't book any birds yet</p>
@@ -51,15 +50,15 @@
         <% @bookings.each do |booking| %>
           <div class="row py-4 clickable" data-controller="booking">
             <div class="col-12"
-                 data-action="click->booking-modal#toggle:stop"
-                 data-controller="booking-modal"
-                 data-booking-modal-modalcanvas-outlet=".modalcanvas"
-                 data-booking-modal-title-value="<%= booking.bird.title %>"
-                 data-booking-modal-description-value="<%= booking.bird.description %>"
-                 data-booking-modal-start-value="<%= booking.start_date %>"
-                 data-booking-modal-end-value="<%= booking.end_date %>"
-                 data-booking-modal-id-value="<%= booking.id %>"
-                 data-booking-modal-img-value= "<%= booking.bird.photo.key ? cloudinary_url(booking.bird.photo.key) : @bird_placeholder_img %>">
+              data-action="click->booking-modal#toggle:stop"
+              data-controller="booking-modal"
+              data-booking-modal-modalcanvas-outlet=".modalcanvas"
+              data-booking-modal-title-value="<%= booking.bird.title %>"
+              data-booking-modal-description-value="<%= booking.bird.description %>"
+              data-booking-modal-start-value="<%= booking.start_date %>"
+              data-booking-modal-end-value="<%= booking.end_date %>"
+              data-booking-modal-id-value="<%= booking.id %>"
+              data-booking-modal-img-value= "<%= booking.bird.photo.key ? cloudinary_url(booking.bird.photo.key) : @bird_placeholder_img %>">
 
               <h3><%= booking.bird.title %></h3>
               <span class="status" data-booking-target="status"><%= booking.status %></span>
@@ -71,49 +70,51 @@
       </div>
     <% end %>
 
-
 <%# ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ incoming bookings section ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ %>
 
-  <h2 class="border-top border-dark pt-3 mt-5">Your incoming bookings</h2>
+    <h2 class="border-top border-dark pt-3 mt-5">Your incoming bookings</h2>
 
       <% if @incoming_bookings.empty? %>
       <div class="message">
         <p>None of your cool birds have been booked yet 🙁</p>
       </div>
-    <% else %>
-      <div class="bookings">
+      <% else %>
+            <div class="bookings">
         <% @incoming_bookings.each do |booking| %>
-
           <div class="row py-4 clickable" data-controller="booking">
             <div class="col-12"
               data-action="click->booking-modal#toggle:stop"
               data-controller="booking-modal"
+              data-booking-modal-modalcanvas-outlet=".modalcanvas"
               data-booking-modal-title-value="<%= booking.bird.title %>"
               data-booking-modal-description-value="<%= booking.bird.description %>"
               data-booking-modal-start-value="<%= booking.start_date %>"
-              data-booking-modal-end-value="<%= booking.end_date %>">
+              data-booking-modal-end-value="<%= booking.end_date %>"
+              data-booking-modal-id-value="<%= booking.id %>"
+              data-booking-modal-img-value= "<%= booking.bird.photo.key ? cloudinary_url(booking.bird.photo.key) : @bird_placeholder_img %>">
+
               <h3><%= booking.bird.title %></h3>
               <span class="status" data-booking-target="status"><%= booking.status %></span>
               <span>from: <%= booking.start_date %> until: <%= booking.end_date %></span>
-              <div class="d-inline-block">
+
+              <div class="mt-2 justify-content-end">
                 <% if booking.status == "pending" %>
                   <%= button_to "Accept booking", booking_path(booking.id, update_type: "accept"), method: :patch, form_class: "d-inline-block", class: "btn btn-success rounded-pill" %>
-                  <%= button_to "Decline booking", booking_path(booking.id, update_type: "decline"), method: :patch, form_class: "d-inline-block", class: "btn btn-danger rounded-pill" %>
+                  <%= button_to "Decline booking", booking_path(booking.id, update_type: "decline"), method: :patch, form_class: "d-inline-block", class: "btn btn-cancel rounded-pill" %>
                 <% end %>
               </div>
+
             </div>
           </div>
         <% end %>
       </div>
     <% end %>
-
+  </div>
 <%# ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ incoming bookings section ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ %>
 
 <%# ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ my bird flock section ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ %>
-
-</div>
-<div class="col-1"></div>
-<div class="col-7 pt-4">
+  <div class="col-1"></div>
+  <div class="col-7 pt-4">
   <div class="row">
     <div class="col-9"><h2 class="mb-4">Your birds</h2></div>
     <div class="col-3"><%= link_to "Add bird + ", new_bird_path, class: "btn-dashboard btn btn-update"%></div>
