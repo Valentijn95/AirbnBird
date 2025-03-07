@@ -1,19 +1,19 @@
 <h1 class="fw-bold display-4">Birds</h1>
 
-<div class="d-flex flex-row flex-wrap justify-content-center custom-gap">
+<div class="d-flex flex-row flex-wrap justify-content-between">
   <% @birds.each do |bird| %>
-    <div class="card flex-column col-3 b-1 m-2 p-0">
-      <% if bird.photo.key != nil %>
-          <%= cl_image_tag bird.photo.key, crop: :fill %>
-      <% end %>
-
-      <h5 class="font-weight-bold bird-link"><%= link_to bird.title.titleize, bird_path(bird.id), class: "px-3" %></h5>
-      <div class="px-3 pb-3">
-        <p class="flex-grow-1"><%= bird.description %></p>
-        <p class="flex-grow-1">$ <%= bird.price %></p>
-        <p class="flex-grow-1">Category: <%= bird.categories %></p>
+    <div class="relative flex-column col-4 p-1">
+      <div class="card b-1">
+        <% if bird.photo.key != nil %>
+            <%= cl_image_tag bird.photo.key, crop: :fill %>
+        <% end %>
+        <h5 class="font-weight-bold bird-link"><%= link_to bird.title.titleize, bird_path(bird.id), class: "px-3" %></h5>
+        <div class="px-3 pb-3">
+          <p class="flex-grow-1"><%= bird.description %></p>
+          <p class="flex-grow-1">$ <%= bird.price %></p>
+          <p class="flex-grow-1">Categories: <%= bird.categories %></p>
+        </div>
       </div>
-
     </div>
   <% end %>
 </div>

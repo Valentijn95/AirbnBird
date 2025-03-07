@@ -4,18 +4,25 @@
     <div class="modal-show">
       <div class="row h-100">
 
-        <div class="col-5 modal-info"> <!-- left column modal-->
+        <div class="col-5 modal-info relative"> <!-- left column modal-->
 
           <h2 class="modal-title text-center" data-modalcanvas-target="title"></h2>
           <p data-modalcanvas-target="description"></p>
           <p data-modalcanvas-target="date"></p>
           <p data-modalcanvas-target="price"></p>
-          <form data-modalcanvas-target="updatebutton" action="" method="get">
-            <input type="submit" class="btn btn-cancel" value="Edit bird">
-          </form>
-          <form data-modalcanvas-target="deletebutton" action="" method="delete">
-            <input data-modalcanvas-target='deletebuttonvalue' data-turbo-confirm="Do you really want to cancel this booking?" type="submit" class="btn btn-cancel" value="Cancel booking">
-          </form>
+
+          <div class="d-flex flex-row absolute-bottom">
+            <div class="col-6 my-5">
+              <form data-modalcanvas-target="deletebutton" action="" method="delete">
+                <input data-modalcanvas-target='deletebuttonvalue' data-turbo-confirm="Do you really want to cancel this booking?" type="submit" class="btn btn-cancel" value="Cancel booking">
+              </form>
+            </div>
+            <div class="col-6 my-5">
+              <form data-modalcanvas-target="updatebutton" action="" method="get">
+                <input type="submit" class="btn btn-cancel" value="Edit bird">
+              </form>
+            </div>
+          </div>
 
         </div>
 
@@ -52,7 +59,7 @@
                  data-booking-modal-start-value="<%= booking.start_date %>"
                  data-booking-modal-end-value="<%= booking.end_date %>"
                  data-booking-modal-id-value="<%= booking.id %>"
-                 data-booking-modal-img-value= "<%= booking.bird.photo.key ? cloudinary_url(booking.bird.photo.key) : "" %>">
+                 data-booking-modal-img-value= "<%= booking.bird.photo.key ? cloudinary_url(booking.bird.photo.key) : @bird_placeholder_img %>">
 
               <h3><%= booking.bird.title %></h3>
               <span class="status" data-booking-target="status"><%= booking.status %></span>
@@ -118,38 +125,35 @@
           <p>You have no birds for rental yet</p>
         </div>
       <% else %>
-        <% @birds.each do |bird| %>
+        <div class="d-flex flex-row flex-wrap justify-content-between">
+          <% @birds.each do |bird| %>
 
-        <div class="row py-4">
-        <div class="col-12"
-
-              data-controller="bird-modal"
-              data-bird-modal-modalcanvas-outlet=".modalcanvas"
-              data-bird-modal-title-value="<%= bird.title %>"
-              data-bird-modal-description-value="<%= bird.description %>"
-              data-bird-modal-price-value="<%= bird.price %>"
-              data-bird-modal-id-value="<%= bird.id %>"
-              data-bird-modal-img-value= "<%= bird.photo.key ? cloudinary_url(bird.photo.key) : "" %>"
-              data-bird-modal-delete-button-value="Delete this bird">
-
-          <div class="card flex-column col-5 b-1 m-2 p-0">
-            <% if bird.photo.key != nil %>
-              <%= cl_image_tag bird.photo.key, crop: :fill %>
-            <% end %>
-
-            <h5 class="font-weight-bold bird-link"><%= link_to bird.title.titleize, bird_path(bird.id), class: "px-3" %></h5>
-            <div class="px-3 pb-3">
-                <p class="flex-grow-1"><%= bird.description %></p>
-                <p class="flex-grow-1">$ <%= bird.price %></p>
-                <p class="flex-grow-1">Category: <%= bird.categories %></p>
-              </div>
-            <button class="btn btn-update mt-2" data-action="click->bird-modal#toggle">Manage bird</button>
-
+          <div class="col-6 flex-column p-1 relative">
+            <div  data-controller="bird-modal"
+                  data-bird-modal-modalcanvas-outlet=".modalcanvas"
+                  data-bird-modal-title-value="<%= bird.title %>"
+                  data-bird-modal-description-value="<%= bird.description %>"
+                  data-bird-modal-price-value="<%= bird.price %>"
+                  data-bird-modal-id-value="<%= bird.id %>"
+                  data-bird-modal-img-value= "<%= bird.photo.key ? cloudinary_url(bird.photo.key) : @bird_placeholder_img %>"
+                  data-bird-modal-delete-button-value="Delete this bird"
+                  class="card b-1">
+                <% if bird.photo.key != nil %>
+                  <%= cl_image_tag bird.photo.key, crop: :fill %>
+                <% end %>
+                <h5 class="font-weight-bold bird-link"><%= link_to bird.title.titleize, bird_path(bird.id), class: "px-3" %></h5>
+                <div class="px-3 pb-5">
+                    <p class="flex-grow-1"><%= bird.description %></p>
+                    <p class="flex-grow-1">$ <%= bird.price %></p>
+                    <p class="flex-grow-1">Categories: <%= bird.categories %></p>
+                  </div>
+                <button class="btn btn-update mt-2 manage-button" data-action="click->bird-modal#toggle:stop">Manage bird</button>
+            </div>
 
           </div>
-        </div>
 
-        <% end %>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>

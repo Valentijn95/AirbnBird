@@ -8,7 +8,6 @@ export default class extends Controller {
   }
 
   fill(title, description, s_date, e_date, img, id) {
-    console.log(img);
     this.imageTarget.style.backgroundImage = `url('${img}')`;
     this.modalframeTarget.style.display = '';
     this.titleTarget.innerText = title;
@@ -24,12 +23,12 @@ export default class extends Controller {
 
   fillBird(title, description, button_value, price, img, id) {
     // prepare
-    this.modalframeTarget.classList.remove("d-none");
+    this.modalframeTarget.style.display = '';
     this.priceTarget.classList.remove("d-none");
     this.updatebuttonTarget.classList.remove("d-none");
 
     //fill values
-    this.imageTarget.src = img;
+    this.imageTarget.style.backgroundImage = `url('${img}')`;
     this.titleTarget.innerText = title;
     this.descriptionTarget.innerText = description;
     this.priceTarget.innerText = `$${price}`;

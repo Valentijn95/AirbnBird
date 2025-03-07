@@ -15,9 +15,11 @@ export default class extends Controller {
   static outlets = ["modalcanvas"];
 
   connect() {
+    console.log("bird modal connected");
   }
 
   toggle() {
+    console.log(this.modalcanvasOutlets[0]);
     this.modalcanvasOutlets[0].fillBird(this.titleValue, this.descriptionValue, this.deleteButtonValue, this.priceValue, this.imgValue, this.idValue);
   }
 }
