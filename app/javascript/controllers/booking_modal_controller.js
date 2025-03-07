@@ -15,7 +15,6 @@ export default class extends Controller {
   static outlets = ["modalcanvas"];
 
   connect() {
-    console.log("booking modal connected");
   }
 
   toggle() {

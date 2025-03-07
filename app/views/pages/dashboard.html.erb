@@ -9,11 +9,16 @@
           <h2 class="modal-title text-center" data-modalcanvas-target="title"></h2>
           <p data-modalcanvas-target="description"></p>
           <p data-modalcanvas-target="date"></p>
-          <form data-modalcanvas-target="form" action="" method="delete">
-            <input data-turbo-confirm="Do you really want to cancel this booking?" type="submit" class="btn btn-cancel" value="cancel booking">
+          <p data-modalcanvas-target="price"></p>
+          <form data-modalcanvas-target="deletebutton" action="" method="delete">
+            <input data-modalcanvas-target='deletebuttonvalue' data-turbo-confirm="Do you really want to cancel this booking?" type="submit" class="btn btn-cancel" value="Cancel booking">
+          </form>
+          <form data-modalcanvas-target="updatebutton" action="" method="get">
+            <input type="submit" class="btn btn-cancel" value="Edit bird">
           </form>
 
         </div>
+
 
         <div class="col-7 modal-image" data-modalcanvas-target="image"><!-- right column modal-->
           <!--<img data-modalcanvas-target="image" src="" alt="bird" height="400">-->
@@ -24,6 +29,7 @@
     </div>
   </div>
 </div>
+
 
 <div class="row">
   <div class="col-4 pt-4">
@@ -46,7 +52,7 @@
                  data-booking-modal-start-value="<%= booking.start_date %>"
                  data-booking-modal-end-value="<%= booking.end_date %>"
                  data-booking-modal-id-value="<%= booking.id %>"
-                 data-booking-modal-img-value= "<%= cloudinary_url(booking.bird.photo.key) %>">
+                 data-booking-modal-img-value= "<%= booking.bird.photo.key ? cloudinary_url(booking.bird.photo.key) : "" %>">
 
               <h3><%= booking.bird.title %></h3>
               <span class="status" data-booking-target="status"><%= booking.status %></span>
@@ -59,7 +65,7 @@
     <% end %>
 
 
-<%# ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ incoming bookings section ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ %>
+<%# ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ incoming bookings section ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ %>
 
   <h2 class="border-top border-dark pt-3 mt-5">Your incoming bookings</h2>
 
@@ -70,8 +76,9 @@
     <% else %>
       <div class="bookings">
         <% @incoming_bookings.each do |booking| %>
+
           <div class="row py-4 clickable" data-controller="booking">
-            <div  class="col-12"
+            <div class="col-12"
               data-action="click->booking-modal#toggle:stop"
               data-controller="booking-modal"
               data-booking-modal-title-value="<%= booking.bird.title %>"
@@ -88,13 +95,14 @@
                 <% end %>
               </div>
             </div>
-
           </div>
         <% end %>
       </div>
     <% end %>
 
-<%# ^^^^^^^^^^^^^^^^^ incoming bookings section ^^^^^^^^^^^^^^^^^ %>
+<%# ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ incoming bookings section ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ %>
+
+<%# ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ my bird flock section ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ %>
 
 </div>
 <div class="col-1"></div>
@@ -111,21 +119,36 @@
         </div>
       <% else %>
         <% @birds.each do |bird| %>
-          <div class="card flex-column col-5 b-1 m-2 p-4">
 
-            <h5><%= link_to bird.title, bird_path(bird.id), class: "bird-card-title" %></h5>
-            <%= image_tag "bird_example.jpg", class: "dashboard-bird-image" %>
+        <div class="row py-4">
+        <div class="col-12"
 
-            <p>$ <%= bird.price %></p>
-            <p>Categories: <%= bird.categories %></p>
-            <br>
+              data-controller="bird-modal"
+              data-bird-modal-modalcanvas-outlet=".modalcanvas"
+              data-bird-modal-title-value="<%= bird.title %>"
+              data-bird-modal-description-value="<%= bird.description %>"
+              data-bird-modal-price-value="<%= bird.price %>"
+              data-bird-modal-id-value="<%= bird.id %>"
+              data-bird-modal-img-value= "<%= bird.photo.key ? cloudinary_url(bird.photo.key) : "" %>"
+              data-bird-modal-delete-button-value="Delete this bird">
+    
+          <div class="card flex-column col-5 b-1 m-2 p-0">
+            <% if bird.photo.key != nil %>
+              <%= cl_image_tag bird.photo.key, crop: :fill %>
+            <% end %>
 
-            <!-- Add the Update Button here -->
-            <%= link_to "Update", edit_bird_path(bird), class: "btn btn-update mt-2" %>
+            <h5 class="font-weight-bold bird-link"><%= link_to bird.title.titleize, bird_path(bird.id), class: "px-3" %></h5>
+            <div class="px-3 pb-3">
+                <p class="flex-grow-1"><%= bird.description %></p>
+                <p class="flex-grow-1">$ <%= bird.price %></p>
+                <p class="flex-grow-1">Categories: <%= bird.categories %></p>
+              </div>
+            <button class="btn btn-update mt-2" data-action="click->bird-modal#toggle">Manage bird</button>
 
-            <!-- Optional: Delete Button -->
-            <%= button_to "Delete", bird_path(bird.id), data: { turbo_confirm: "Are you sure you want to delete #{bird.title}?" }, method: :delete, class: "btn btn-cancel mt-2" %>
+
           </div>
+        </div>
+
         <% end %>
       <% end %>
     </div>
