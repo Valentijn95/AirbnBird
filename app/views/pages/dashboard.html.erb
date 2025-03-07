@@ -10,11 +10,11 @@
           <p data-modalcanvas-target="description"></p>
           <p data-modalcanvas-target="date"></p>
           <p data-modalcanvas-target="price"></p>
-          <form data-modalcanvas-target="deletebutton" action="" method="delete">
-            <input data-modalcanvas-target='deletebuttonvalue' data-turbo-confirm="Do you really want to cancel this booking?" type="submit" class="btn btn-cancel" value="Cancel booking">
-          </form>
           <form data-modalcanvas-target="updatebutton" action="" method="get">
             <input type="submit" class="btn btn-cancel" value="Edit bird">
+          </form>
+          <form data-modalcanvas-target="deletebutton" action="" method="delete">
+            <input data-modalcanvas-target='deletebuttonvalue' data-turbo-confirm="Do you really want to cancel this booking?" type="submit" class="btn btn-cancel" value="Cancel booking">
           </form>
 
         </div>
@@ -131,7 +131,7 @@
               data-bird-modal-id-value="<%= bird.id %>"
               data-bird-modal-img-value= "<%= bird.photo.key ? cloudinary_url(bird.photo.key) : "" %>"
               data-bird-modal-delete-button-value="Delete this bird">
-    
+
           <div class="card flex-column col-5 b-1 m-2 p-0">
             <% if bird.photo.key != nil %>
               <%= cl_image_tag bird.photo.key, crop: :fill %>
@@ -141,7 +141,7 @@
             <div class="px-3 pb-3">
                 <p class="flex-grow-1"><%= bird.description %></p>
                 <p class="flex-grow-1">$ <%= bird.price %></p>
-                <p class="flex-grow-1">Categories: <%= bird.categories %></p>
+                <p class="flex-grow-1">Category: <%= bird.categories %></p>
               </div>
             <button class="btn btn-update mt-2" data-action="click->bird-modal#toggle">Manage bird</button>
 
