@@ -8,12 +8,6 @@ class Booking < ApplicationRecord
   validates :status, inclusion: { in: %w(pending accepted declined),
   message: "status can only be pending, accepted or declined" }
 
-
-  # step 1: start date > now
-  # step 2: end date < start date
-  # step 3: period between start date and end date don't overlap with already booked dates
-  # step 4: already taken dates are displayed in date picker
-
   private
 
   def start_date_in_future?

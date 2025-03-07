@@ -39,7 +39,7 @@
     <% end %>
 
 
-<%# ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ incoming bookings section ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ %>
+<%# ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ incoming bookings section ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ %>
 
   <h2 class="border-top border-dark pt-3 mt-5">Your incoming bookings</h2>
 
@@ -50,8 +50,10 @@
     <% else %>
       <div class="bookings">
         <% @incoming_bookings.each do |booking| %>
+
           <div class="row py-4 clickable" data-controller="booking">
-            <div  class="col-12"
+            <%# dit is de wrapper voor de modal met de booking info (niet pop up) %>
+            <div class="col-12"
               data-action="click->booking-modal#toggle:stop"
               data-controller="booking-modal"
               data-booking-modal-title-value="<%= booking.bird.title %>"
@@ -67,25 +69,28 @@
                   <%= button_to "Decline booking", booking_path(booking.id, update_type: "decline"), method: :patch, form_class: "d-inline-block", class: "btn btn-danger rounded-pill" %>
                 <% end %>
               </div>
-            <div class="booking-modal d-none" data-booking-modal-target="modal">
-              <div class="modal-wrapper" data-action="click->booking-modal#close:stop"></div>
-              <div class="modal-show">
-                <h2 class="booking-modal-title" data-booking-modal-target="title"></h2>
-                  <p data-booking-modal-target="description"></p>
-                  <p data-booking-modal-target="date"></p>
-                  <img src="" alt="bird">
-                  <%= button_to "Cancel booking",  booking_path(booking.id), :method => :delete, class: "btn btn-danger" %>
+
+              <%# dit is de wrapper voor de modal met het pop-up scherm %>
+              <div class="booking-modal d-none" data-booking-modal-target="modal">
+                <div class="modal-wrapper" data-action="click->booking-modal#close:stop"></div>
+                <div class="modal-show">
+                  <h2 class="booking-modal-title" data-booking-modal-target="title"></h2>
+                    <p data-booking-modal-target="description"></p>
+                    <p data-booking-modal-target="date"></p>
+                    <img src="" alt="bird">
+                    <%= button_to "Cancel booking",  booking_path(booking.id), :method => :delete, class: "btn btn-danger" %>
+                </div>
               </div>
-            </div>
 
             </div>
-
           </div>
         <% end %>
       </div>
     <% end %>
 
-<%# ^^^^^^^^^^^^^^^^^ incoming bookings section ^^^^^^^^^^^^^^^^^ %>
+<%# ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ incoming bookings section ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ %>
+
+<%# ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ my bird flock section ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ %>
 
 </div>
 <div class="col-6 pt-4">
@@ -101,14 +106,21 @@
         </div>
       <% else %>
         <% @birds.each do |bird| %>
-          <div class="card flex-column col-5 b-1 m-2 p-4">
 
-            <h5><%= link_to bird.title, bird_path(bird.id), class: "bird-card-title" %></h5>
-            <%= image_tag "bird_example.jpg", class: "dashboard-bird-image" %>
+        <%# dit is de originele bird card  %>
+          <div class="card flex-column col-5 b-1 m-2 p-0">
+            <% if bird.photo.key != nil %>
+              <%= cl_image_tag bird.photo.key, crop: :fill %>
+            <% end %>
 
-            <p>$ <%= bird.price %></p>
-            <p>Categories: <%= bird.categories %></p>
-            <br>
+            <h5 class="font-weight-bold bird-link"><%= link_to bird.title.titleize, bird_path(bird.id), class: "px-3" %></h5>
+            <div class="px-3 pb-3">
+                <p class="flex-grow-1"><%= bird.description %></p>
+                <p class="flex-grow-1">$ <%= bird.price %></p>
+                <p class="flex-grow-1">Categories: <%= bird.categories %></p>
+              </div>
+
+            <button>Manage bird</button>
 
             <!-- Add the Update Button here -->
             <%= link_to "Update", edit_bird_path(bird), class: "btn btn-update mt-2" %>
@@ -116,6 +128,8 @@
             <!-- Optional: Delete Button -->
             <%= button_to "Delete", bird_path(bird.id), data: { turbo_confirm: "Are you sure you want to delete #{bird.title}?" }, method: :delete, class: "btn btn-cancel mt-2" %>
           </div>
+        <%# dit is de originele bird card  %>
+
         <% end %>
       <% end %>
     </div>
