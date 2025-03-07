@@ -13,12 +13,15 @@
 }
 
 .status {
+  display: inline-block;
+  width: auto;
+  margin-top: 0.5rem;
   padding: 0.6rem;
   border-radius: 1rem;
 }
 
 .pending-status {
-  background-color: rgb(132, 96, 155);
+  background-color: rgb(167, 142, 182);
 }
 
 .accepted-status {

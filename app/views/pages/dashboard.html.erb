@@ -1,10 +1,35 @@
+ <div data-controller="modalcanvas" class="modalcanvas">
+   <div class="d-none" data-modalcanvas-target="modalframe">
+    <div class="modal-wrapper" data-action="click->modalcanvas#close"></div>
+    <div class="modal-show">
+      <div class="row">
+
+        <div class="col-6"> <!-- left column modal-->
+          <h2 class="modal-title" data-modalcanvas-target="title"></h2>
+          <p data-modalcanvas-target="description"></p>
+          <p data-modalcanvas-target="date"></p>
+          <form data-modalcanvas-target="form" action="" method="delete">
+            <input data-turbo-confirm="Do you really want to cancel this booking?" type="submit" class="btn btn-cancel" value="cancel booking">
+          </form>
+        </div>
+
+        <div class="col-6 modal-image"><!-- right column modal-->
+          <!--<img data-modalcanvas-target="image" src="" alt="bird" height="400">-->
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-6 pt-4">
     <h2 class="mb-4">Your bookings</h2>
 
     <% if @bookings.empty? %>
       <div class="message">
-        <p>You don't have any bookings active currently</p>
+        <p>You didn't book any birds yet</p>
       </div>
     <% else %>
       <div class="bookings">
@@ -13,25 +38,18 @@
             <div class="col-12"
                  data-action="click->booking-modal#toggle:stop"
                  data-controller="booking-modal"
+                 data-booking-modal-modalcanvas-outlet=".modalcanvas"
                  data-booking-modal-title-value="<%= booking.bird.title %>"
                  data-booking-modal-description-value="<%= booking.bird.description %>"
                  data-booking-modal-start-value="<%= booking.start_date %>"
-                 data-booking-modal-end-value="<%= booking.end_date %>">
+                 data-booking-modal-end-value="<%= booking.end_date %>"
+                 data-booking-modal-id-value="<%= booking.id %>"
+                 data-booking-modal-img-value= "<%= cloudinary_url(booking.bird.photo.key) %>">
+
               <h3><%= booking.bird.title %></h3>
               <span class="status" data-booking-target="status"><%= booking.status %></span>
               <span>from: <%= booking.start_date %> until: <%= booking.end_date %></span>
 
-              <div class="booking-modal d-none" data-booking-modal-target="modal">
-                <div class="modal-wrapper" data-action="click->booking-modal#close:stop">
-                </div>
-                <div class="modal-show">
-                  <h2 class="booking-modal-title" data-booking-modal-target="title"></h2>
-                  <p data-booking-modal-target="description"></p>
-                  <p data-booking-modal-target="date"></p>
-                  <img src="" alt="bird">
-                  <%= button_to "Cancel booking", booking_path(booking.id), data: { turbo_confirm: "Do you really want to cancel this booking?" }, method: :delete, class: "btn btn-cancel" %>
-                </div>
-              </div>
             </div>
           </div>
         <% end %>
@@ -69,19 +87,6 @@
                   <%= button_to "Decline booking", booking_path(booking.id, update_type: "decline"), method: :patch, form_class: "d-inline-block", class: "btn btn-danger rounded-pill" %>
                 <% end %>
               </div>
-
-              <%# dit is de wrapper voor de modal met het pop-up scherm %>
-              <div class="booking-modal d-none" data-booking-modal-target="modal">
-                <div class="modal-wrapper" data-action="click->booking-modal#close:stop"></div>
-                <div class="modal-show">
-                  <h2 class="booking-modal-title" data-booking-modal-target="title"></h2>
-                    <p data-booking-modal-target="description"></p>
-                    <p data-booking-modal-target="date"></p>
-                    <img src="" alt="bird">
-                    <%= button_to "Cancel booking",  booking_path(booking.id), :method => :delete, class: "btn btn-danger" %>
-                </div>
-              </div>
-
             </div>
           </div>
         <% end %>
