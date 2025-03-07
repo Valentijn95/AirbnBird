@@ -1,11 +1,12 @@
  <div data-controller="modalcanvas" class="modalcanvas">
-   <div class="d-none" data-modalcanvas-target="modalframe">
+   <div style="display:none" class="modalframe" data-modalcanvas-target="modalframe">
     <div class="modal-wrapper" data-action="click->modalcanvas#close"></div>
     <div class="modal-show">
-      <div class="row">
+      <div class="row h-100">
 
-        <div class="col-6"> <!-- left column modal-->
-          <h2 class="modal-title" data-modalcanvas-target="title"></h2>
+        <div class="col-5 modal-info"> <!-- left column modal-->
+
+          <h2 class="modal-title text-center" data-modalcanvas-target="title"></h2>
           <p data-modalcanvas-target="description"></p>
           <p data-modalcanvas-target="date"></p>
           <p data-modalcanvas-target="price"></p>
@@ -15,10 +16,12 @@
           <form data-modalcanvas-target="updatebutton" action="" method="get">
             <input type="submit" class="btn btn-cancel" value="Edit bird">
           </form>
+
         </div>
 
-        <div class="col-6 modal-image"><!-- right column modal-->
-          <img data-modalcanvas-target="image" src="" alt="bird" height="400">
+
+        <div class="col-7 modal-image" data-modalcanvas-target="image"><!-- right column modal-->
+          <!--<img data-modalcanvas-target="image" src="" alt="bird" height="400">-->
         </div>
 
       </div>
@@ -29,7 +32,7 @@
 
 
 <div class="row">
-  <div class="col-6 pt-4">
+  <div class="col-4 pt-4">
     <h2 class="mb-4">Your bookings</h2>
 
     <% if @bookings.empty? %>
@@ -102,10 +105,11 @@
 <%# ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ my bird flock section ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ %>
 
 </div>
-<div class="col-6 pt-4">
+<div class="col-1"></div>
+<div class="col-7 pt-4">
   <div class="row">
     <div class="col-9"><h2 class="mb-4">Your birds</h2></div>
-    <div class="col-3"><%= link_to "Add bird + ",  new_bird_path, class: "btn-dashboard btn btn-success"%></div>
+    <div class="col-3"><%= link_to "Add bird + ", new_bird_path, class: "btn-dashboard btn btn-update"%></div>
   </div>
 
     <div class="row justify-content-between">

@@ -9,8 +9,8 @@ export default class extends Controller {
 
   fill(title, description, s_date, e_date, img, id) {
     console.log(img);
-    this.imageTarget.src = img;
-    this.modalframeTarget.classList.remove("d-none");
+    this.imageTarget.style.backgroundImage = `url('${img}')`;
+    this.modalframeTarget.style.display = '';
     this.titleTarget.innerText = title;
     this.descriptionTarget.innerText = description;
     this.dateTarget.innerText = `from: ${s_date} to: ${e_date}`;
@@ -40,6 +40,6 @@ export default class extends Controller {
   }
 
   close() {
-    this.modalframeTarget.classList.add("d-none");
+    this.modalframeTarget.style.display = 'none';
   }
 }
