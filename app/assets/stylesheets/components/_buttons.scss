@@ -1,48 +1,36 @@
 /* for all buttons */
-.btn {
-  width: 100%;
-  max-width: 200px;
-  height: 40px;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  text-decoration: none;
-  white-space: nowrap;
-  box-sizing: border-box;
-}
+
 
 /* Delete Button (Red) */
 .btn-cancel {
   background-color: rgb(204, 57, 57);
-  color: white;
+  color: black;
 }
 
 .btn-cancel:hover {
-  background-color: rgb(255, 99, 99);
+  background-color: rgb(204, 57, 57);
+  color: white;
 }
 
 /* Update Button (Blue) */
 .btn-update {
-  background-color: rgb(58, 120, 214);
-  color: white;
+  background-color:#396788;
+  color: black;
 }
 
 .btn-update:hover {
-  background-color: rgb(78, 142, 237);
+  color: white;
 }
 
 /* Success Button (Green) */
 .btn-success {
-  background-color: rgb(60, 172, 112);
-  color: white;
+  background-color: rgb(60, 172, 84);
+  color: black;
 }
 
 .btn-success:hover {
-  background-color: rgb(109, 180, 142);
+  background-color: rgb(60, 172, 84);
+  color: white;
 }
 
 /* Update Button (Blue) - Additional Button */

@@ -17,11 +17,11 @@
   width: auto;
   margin-top: 0.5rem;
   padding: 0.6rem;
-  border-radius: 1rem;
+  border-radius: 0.8rem;
 }
 
 .pending-status {
-  background-color: rgb(167, 142, 182);
+  background-color: #447495;
 }
 
 .accepted-status {
@@ -34,11 +34,11 @@
 
 .clickable {
   cursor: pointer;
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
 }
 
 .clickable:hover {
-  background-color: rgb(165, 165, 165);
+  background-color: #83afce;
 }
 
 .modal-wrapper {
@@ -48,26 +48,41 @@
   height: 100%;
   width: 100%;
   z-index: 2;
-  background-color:rgb(43, 43, 43);
-  opacity: 70%;
+  background-color:rgb(225, 225, 225);
+  opacity: 80%;
 }
 
 .dashboard-bird-image {
   width: 100%;
 }
 
-.modal-show {
-  border-radius: 1rem;
-  box-shadow: 3px 3px 3px rgb(29, 29, 29);
+.modal-image {
+  background-size: cover;
+  background-position: center;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.modal-info {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
   padding: 2rem;
+  background-color: rgb(40, 40, 40);
+  color: white;
+  opacity: 100;
+}
+
+.modal-show {
   position: absolute;
   height: 80%;
   width: 80%;
-  background-color: rgb(239, 239, 239);
   z-index: 3;
   top: 10%;
   right: 10%;
-  opacity: 100%;
+}
+
+.modalframe{
+  transition: 200ms;
 }
 
 .bird-card-title {
